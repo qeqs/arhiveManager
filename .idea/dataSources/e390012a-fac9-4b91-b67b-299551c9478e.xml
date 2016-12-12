@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="hibernate.cfg.xml/Hibernate">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.0">
+    <root id="1"/>
+    <database id="2" parent="1" name="Arhives">
+      <ObjectId>16604</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <schema id="3" parent="2" name="public">
+      <ObjectId>2200</ObjectId>
+      <IntrospectionTimestamp>2016-12-12.21:51:02.164</IntrospectionTimestamp>
+      <IntrospectionStateNumber>571</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="4" parent="2" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+    </schema>
+    <schema id="5" parent="2" name="pg_toast">
+      <ObjectId>99</ObjectId>
+    </schema>
+    <schema id="6" parent="2" name="pg_temp_1">
+      <ObjectId>11848</ObjectId>
+    </schema>
+    <schema id="7" parent="2" name="pg_toast_temp_1">
+      <ObjectId>11849</ObjectId>
+    </schema>
+    <schema id="8" parent="2" name="information_schema">
+      <ObjectId>12113</ObjectId>
+    </schema>
+    <sequence id="9" parent="3" name="arhive_id_seq">
+      <ObjectId>16605</ObjectId>
+      <StateNumber>569</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+    </sequence>
+    <sequence id="10" parent="3" name="entry_id_seq">
+      <ObjectId>16616</ObjectId>
+      <StateNumber>570</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+    </sequence>
+    <table id="11" parent="3" name="arhive">
+      <ObjectId>16607</ObjectId>
+      <StateNumber>571</StateNumber>
+    </table>
+    <table id="12" parent="3" name="entry">
+      <ObjectId>16618</ObjectId>
+      <StateNumber>570</StateNumber>
+    </table>
+    <column id="13" parent="11" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>569</StateNumber>
+      <DefaultExpression>nextval(&apos;arhive_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="14" parent="11" name="name">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>569</StateNumber>
+    </column>
+    <column id="15" parent="11" name="date">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>569</StateNumber>
+    </column>
+    <column id="16" parent="11" name="size">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>569</StateNumber>
+    </column>
+    <column id="17" parent="11" name="path">
+      <Position>5</Position>
+      <DataType>text|0</DataType>
+      <StateNumber>571</StateNumber>
+    </column>
+    <index id="18" parent="11" name="arhive_pkey">
+      <ObjectId>16614</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="19" parent="11" name="arhive_pkey">
+      <ObjectId>16615</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>arhive_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="20" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>570</StateNumber>
+      <DefaultExpression>nextval(&apos;entry_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="21" parent="12" name="name">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>570</StateNumber>
+    </column>
+    <column id="22" parent="12" name="arhive_id">
+      <Position>3</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>570</StateNumber>
+    </column>
+    <index id="23" parent="12" name="entry_pkey">
+      <ObjectId>16625</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="24" parent="12" name="entry_pkey">
+      <ObjectId>16626</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>entry_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="25" parent="12" name="fk_arhive">
+      <ObjectId>16627</ObjectId>
+      <ColNames>arhive_id</ColNames>
+      <RefTableName>arhive</RefTableName>
+      <RefKeyName>arhive_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>
