@@ -5,7 +5,7 @@ import java.sql.Date;
 import javax.persistence.Entity;
 
 
-@Entity
+@Entity(name = "public.\"arhive\"")
 @Table(name = "arhive", schema = "public", catalog = "Arhives")
 public class ArhiveEntity implements entities.Entity {
     private int id;
@@ -88,5 +88,10 @@ public class ArhiveEntity implements entities.Entity {
         result = 31 * result + (size != null ? size.hashCode() : 0);
         result = 31 * result + (path != null ? path.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

@@ -29,7 +29,7 @@ public class Arhivator {
 
             for (int i = 0; i < entries.length; i++) {
 
-                zipOutputStream.putNextEntry(new ZipEntry(entries[i].substring(entries[i].lastIndexOf("\\"))));
+                zipOutputStream.putNextEntry(new ZipEntry(entries[i].substring(entries[i].lastIndexOf("\\")+1)));
                 try (FileInputStream entryReadStream = new FileInputStream(entries[i])) {
 
                     length += entryReadStream.available();
@@ -42,7 +42,7 @@ public class Arhivator {
             }
             ArhiveEntity arhiveEntity = new ArhiveEntity();
             arhiveEntity.setDate(new Date(new java.util.Date().getTime()));
-            arhiveEntity.setName(path.substring(path.lastIndexOf("\\")));
+            arhiveEntity.setName(path.substring(path.lastIndexOf("\\")+1));
             arhiveEntity.setPath(path);
             arhiveEntity.setSize(length);
             arhiveEntity.setId(arhiveEntity.hashCode());
@@ -51,9 +51,9 @@ public class Arhivator {
             for (String str : entries) {
 
                 EntryEntity entryEntity = new EntryEntity();
-                entryEntity.setName(str.substring(str.lastIndexOf("\\")));
+                entryEntity.setName(str.substring(str.lastIndexOf("\\")+1));
                 entryEntity.setArhive(arhiveEntity);
-
+                entryEntity.setId(entryEntity.hashCode());
 
                 HibernateUtil.getEntryDAO().insert(entryEntity);
 

@@ -3,7 +3,7 @@ package entities;
 import javax.persistence.*;
 import javax.persistence.Entity;
 
-@Entity
+@Entity(name = "public.\"entry\"")
 @Table(name = "entry", schema = "public", catalog = "Arhives")
 public class EntryEntity implements entities.Entity{
     private int id;
@@ -59,5 +59,10 @@ public class EntryEntity implements entities.Entity{
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

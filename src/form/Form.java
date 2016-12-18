@@ -16,6 +16,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.*;
 import javax.swing.tree.*;
 
@@ -35,7 +36,7 @@ public class Form extends JFrame {
 
     private void buttonCreateAction(ActionEvent e) {
 
-        JFileChooser fileChooser = new JFileChooser();//создаем архив
+        JFileChooser fileChooser = new JFileChooser();//архив
         String filename = "";
         int dialog = fileChooser.showSaveDialog(Form.this);
 
@@ -44,14 +45,14 @@ public class Form extends JFrame {
         filename = fileChooser.getCurrentDirectory().toString()+ "\\"+fileChooser.getSelectedFile().getName();
 
 
-        FileDialog fd = new FileDialog(Form.this);//помещаем в него файлы
+        FileDialog fd = new FileDialog(Form.this);//файлы
         fd.setTitle("Choose files");
         fd.setMultipleMode(true);
         fd.setVisible(true);
         File[] files =fd.getFiles();
         String[] entries = new String[files.length];
         for(int i = 0;i<files.length;i++)
-            entries[i] = files[i].getPath();//+files[i].getName();
+            entries[i] = files[i].getPath();
 
         try {
             Arhivator.createArhive(filename,entries);
@@ -65,10 +66,13 @@ public class Form extends JFrame {
     private void buttonDeleteAction(ActionEvent e) {
         try {
             Arhivator.deleteArhive((ArhiveEntity) comboBox1.getSelectedItem());
+            comboBox1.removeItem(comboBox1.getSelectedItem());
+            tree1.setModel(null);
         } catch (IOException e1) {
             e1.printStackTrace();
             JOptionPane.showConfirmDialog(Form.this,e1);
         }
+        refreshData();
     }
 
     private void comboBox1ActionPerformed(ActionEvent e) {
@@ -145,7 +149,6 @@ public class Form extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         tree1.setModel(null);
-
         refreshData();
 
     }
@@ -156,12 +159,14 @@ public class Form extends JFrame {
         if(comboBox1.getSelectedItem()==null)return;
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(comboBox1.getSelectedItem());
         int i = 0;
-        for (EntryEntity entry : HibernateUtil.getEntryDAO().getAllByArhive((ArhiveEntity)comboBox1.getSelectedItem()))
+        for (EntryEntity entry : HibernateUtil.getEntryDAO().getAllByArhive((ArhiveEntity) comboBox1.getSelectedItem()))
             root.insert(new DefaultMutableTreeNode(entry.getName()),i++);
 
         TreeModel treeModel = new DefaultTreeModel(root);
         tree1.setModel(treeModel);
     }
+
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Vadim Lygin
     private JScrollPane scrollPane1;
